@@ -64,8 +64,7 @@ public class CifrarioDiCesare {
     }
 
     private void msgIsValid(String messaggio) {
-        if (messaggio == null || messaggio.isEmpty()) {
-            System.out.println("Error: inserire messaggio");
-        }
+        if (messaggio == null || messaggio.isEmpty())
+            throw new NullPointerException("messaggio vuoto");
     }
 }

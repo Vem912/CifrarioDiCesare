@@ -11,7 +11,7 @@ public class App {
     }
 
     /**
-     * versione 1.0
+     * GUI versione 1.0
      */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
@@ -40,4 +40,217 @@ public class App {
 //            break;
 //        }
 //    }
+
+    /**
+     * GUI versione 2.0
+     */
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        presentazione();
+        while (true) {
+            String digit;
+            while(true){
+                digit = sc.nextLine();
+                checkDigit(digit);
+                if(!digit.equalsIgnoreCase("c")
+                        && !digit.equalsIgnoreCase("d")
+                        && !digit.equalsIgnoreCase("menu"))
+                {
+                    System.out.println("Sei davvero simpatico! inserisci un comando comprensibile!!");
+                    System.out.println("Se sei indeciso sul da farsi degita 'MENU'");
+                }else break;
+            }
+
+            switch (digit.toLowerCase()) {
+                case "c" : cifraMessaggio(sc); presentazione(); break;
+                case "d" : decifraMessagio(sc); presentazione(); break;
+                default :break;
+            }
+        }
+    }
+
+    private static void bruteForce(Scanner sc) {
+        DecifratoreAutomatico dec = new DecifratoreAutomatico();
+        System.out.println("Benvenuto nel servizio di Brute Force!");
+        System.out.println("Ti aiutero' a decifrare il messaggio ;)");
+        System.out.println("Inserisci messaggio da decifrare!");
+        do {
+            String message = sc.nextLine();
+            checkExit(message);
+            try {
+                dec.decifra(message);
+                System.out.println("Queste sono tutte le opzioni disponibili! Adesso sta a te!");
+                System.out.println("Buona fortuna e a presto!");
+                break;
+            } catch (Exception e) {
+                System.out.println("Che simpaticone!! Inserisci il messaggio da decifrare!");
+            }
+        } while (true);
+        presentazione();
+    }
+
+    private static void decifraMessagio(Scanner sc) {
+        System.out.println("Benvenuto nel servizio di decifratura messaggi!");
+        System.out.println("Prima di tutto dobbiamo assicurarci che tu abbia l'autorizzazione a decriptare il messaggio");
+        System.out.println("Sei a conoscenza della chiave di decriptazione [S,N]");
+        while (true) {
+            String digit = sc.nextLine();
+            checkExit(digit);
+            if (digit.equalsIgnoreCase("s")) {
+                System.out.println("Ottimo, inseriscila pure...");
+                CifrarioDiCesare cifrarioDiCesare;
+                String key;
+                do{
+                    key = sc.nextLine();
+                    checkExit(key);
+                }while (keyIsValid(key));
+                System.out.println("La chiave "+ key+ " e' valida!");
+                cifrarioDiCesare = new CifrarioDiCesare(Integer.parseInt(key));
+                System.out.println("Ora digita il messaggio da decifrare");
+                while(true) {
+                    String message = sc.nextLine();
+                    checkExit(message);
+                    try {
+                        String msgDecifrato = cifrarioDiCesare.decifra(message);
+                        System.out.println();
+                        System.out.println("Congratulazioni, il messaggio e' stato decifrato con successo!!");
+                        System.out.println("Messaggio Decifrato: " + msgDecifrato);
+                        System.out.println();
+                        System.out.println("Vuoi decifrare un'altro messaggio con la stessa chiave? [S,N]");
+                        String digitCheck;
+                        while (true) {
+                            digitCheck = sc.nextLine();
+                            checkExit(digitCheck);
+                            if(!digitCheck.equalsIgnoreCase("s")
+                                    && !digitCheck.equalsIgnoreCase("n")) {
+                                System.out.println("Non sembrava una domanda cosi difficile!");
+                                System.out.println("Dovevi solo digitare 'S' o 'N'! Riprova!");
+                            }else break;
+                        }
+                        if (digitCheck.equalsIgnoreCase("n")){
+                            System.out.println("E' stato un piacere esserti di aiuto, a preso! <3");
+                            System.out.println();
+                            break;
+                        }
+                        System.out.println("Inserisci il nuovo messaggio da decifrare");
+
+                    } catch (Exception e) {
+                        System.out.println("Non e' possibile decifrare il nulla! Inserisci un messaggio!");
+                    }
+                }
+                break;
+            }
+            else if (digit.equalsIgnoreCase("n")){
+                System.out.println();
+                System.out.println("Te la sei dimenticata eh? sei proprio una persona sbadata!!");
+                System.out.println("Oppure sei un impostore??");
+                System.out.println("Bhe', poco importa, ho la soluzione che fa per te!!");
+                System.out.println("Ma ti avverto: costera' un po'!!");
+                while(true) {
+                    System.out.println("Vuoi continuare? [S,N]");
+                    String digitDue = sc.nextLine();
+                    if (digitDue.equalsIgnoreCase("n")){
+                        System.out.println("Meglio cosi'! Hai ricordato la chiave? [S,N] ");
+                        break;
+                    }else if (digitDue.equalsIgnoreCase("s")) {
+                        System.out.println("Ok, prima di tutto inserisci il numero della tua carta di credito:");
+                        while (true) {
+                            String card = sc.nextLine();
+                            checkExit(card);
+                            if(!card.isEmpty()) break;
+                            System.out.println();
+                            System.out.println("Non cercare di fare il furbacchione!!!");
+                            System.out.println("Inserisci il tuo numero di carta:");
+                        }
+                        System.out.println();
+                        System.out.println("Ci sei cascato! :)");
+                        System.out.println("Verrai subito reindirizzato al nostro servizio SUPERSEGRETO!!");
+                        bruteForce(sc);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void cifraMessaggio(Scanner sc) {
+        CifrarioDiCesare cifrarioDiCesare;
+        System.out.println("Benvenuto nel servizio di cifratura messaggi");
+        System.out.println("Prima di tutto inserisci una chiave di cifratura");
+        while (true) {
+            String key;
+            do {
+                key = sc.nextLine();
+                checkExit(key);
+            } while (keyIsValid(key));
+            System.out.println("La chiave "+ key+ " e' valida!");
+            cifrarioDiCesare = new CifrarioDiCesare(Integer.parseInt(key));
+            System.out.println("E' giunto il momento di inserire il messaggio segreto");
+            while(true) {
+                String message = sc.nextLine();
+                checkExit(message);
+                try {
+                    String msgCifrato = cifrarioDiCesare.cifra(message);
+                    System.out.println();
+                    System.out.println("Congratulazioni, il messaggio e' stato cifrato con successo!!");
+                    System.out.println("Messaggio Cifrato: " + msgCifrato);
+                    System.out.println();
+                    System.out.println("Vuoi cifrare un'altro messaggio con la stessa chiave? [S,N]");
+                    String digitCheck;
+                    while (true) {
+                        digitCheck = sc.nextLine();
+                        checkExit(digitCheck);
+                        if(!digitCheck.equalsIgnoreCase("s")
+                                && !digitCheck.equalsIgnoreCase("n")) {
+                            System.out.println("Non sembrava una domanda cosi difficile!");
+                            System.out.println("Dovevi solo digitare 'S' o 'N'! Riprova!");
+                        }else break;
+                    }
+                    if (digitCheck.equalsIgnoreCase("n")){
+                        System.out.println("E' stato un piacere esserti di aiuto, a preso! <3");
+                        System.out.println();
+                        break;
+                    }
+                    System.out.println("Inserisci il nuovo messaggio da cifrare");
+
+                } catch (Exception e) {
+                    System.out.println("Non e' possibile cifrare il nulla! Inserisci un messaggio!");
+                }
+            }
+            break;
+        }
+    }
+
+    private static boolean keyIsValid(String key) {
+        try{
+            Integer.parseInt(key);
+            return false;
+        } catch (Exception e){
+            System.out.println("Che burlone!! Inserisci un valore numerico!");
+            return true;
+        }
+    }
+
+    private static void checkExit(String digit) {
+        if(digit.equalsIgnoreCase("exit")) System.exit(0);
+        if(digit.equalsIgnoreCase("menu")) System.out.println("'EXIT' per terminare");
+    }
+    private static void checkDigit(String digit) {
+        if(digit.equalsIgnoreCase("exit")) System.exit(0);
+        if(digit.equalsIgnoreCase("menu")) menu();
+    }
+
+    private static void presentazione()
+    {
+        System.out.println("Benvenuto nel Cifrario di Cesare");
+        System.out.println("Rendero' SICURI i tuoi segreti");
+        System.out.println("'EXIT' per terminare (in ogni momento)");
+        System.out.println("'MENU' per menu funzioni");
+    }
+    public static void menu(){
+        System.out.println("Benvenuto nel menu servizi");
+        System.out.println("'C' per cifrare messaggio");
+        System.out.println("'D' per decifrare messaggio");
+    }
 }

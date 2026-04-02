@@ -1,11 +1,16 @@
 package org.example;
 
 public class DecifratoreAutomatico {
-    public int decifra(String message){
+
+    public void decifra(String message){
+        msgIsValid(message);
         for(int i = 1; i <26 ; i++){
-            CifrarioDiCesare cifrarioDiCesare1 = new CifrarioDiCesare(i);
-            System.out.println(i +" "+ cifrarioDiCesare1.decifra(message));
+            CifrarioDiCesare cifrarioDiCesare = new CifrarioDiCesare(i);
+            System.out.println("Chiave "+ i +" DecMsg: "+ cifrarioDiCesare.decifra(message));
         }
-        return 1;
+    }
+    private void msgIsValid(String messaggio) {
+        if (messaggio == null || messaggio.isEmpty())
+            throw new NullPointerException("messaggio vuoto");
     }
 }
