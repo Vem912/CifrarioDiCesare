@@ -3,26 +3,29 @@
  */
 package org.example;
 
+import java.util.Scanner;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        CifrarioDiCesare cifrarioDiCesare = new CifrarioDiCesare(4);
-        String messaggio = "Lo farò, andremo là, è importante!";
+        Scanner sc = new Scanner(System.in);
+        CifrarioDiCesare cifrarioDiCesare;
+        System.out.println("Benvenuto nel Cifrario di Cesare");
+        System.out.println("Digita 'exit' per uscire");
 
-        String msgCifrato = cifrarioDiCesare.cifra(messaggio);
-        System.out.println("Messaggio Cifrato: " + msgCifrato);
-
-        String msgDecifrato = cifrarioDiCesare.decifra(msgCifrato);
-        System.out.println("Messaggio Decifrato: " + msgDecifrato);
-        System.out.println();
-
-        System.out.println("Decifratura a forza bruta:");
-        for(int i = 1; i <26 ; i++){
-            CifrarioDiCesare cifrarioDiCesare1 = new CifrarioDiCesare(i);
-            System.out.println(i +" "+ cifrarioDiCesare1.decifra(msgCifrato));
+        while(true){
+            System.out.println("Inserisci il messaggio da cifrare");
+            String messaggio = sc.nextLine();
+            if(messaggio.equalsIgnoreCase("exit")) break;
+            System.out.println("Inserisci chiave di cifratura");
+            String chiave = sc.nextLine();
+            cifrarioDiCesare = new CifrarioDiCesare(Integer.parseInt(chiave));
+            String cifrateMsg = cifrarioDiCesare.cifra(messaggio);
+            System.out.println("Messaggio Cifrato: " + cifrateMsg );
+            System.out.println("Messaggio Decifrato: " + cifrarioDiCesare.decifra(cifrateMsg));
         }
     }
 }

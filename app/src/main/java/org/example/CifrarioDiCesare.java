@@ -14,6 +14,16 @@ public class CifrarioDiCesare {
     public CifrarioDiCesare(int key) {
         this.key = checkKey(key);
     }
+    
+    public CifrarioDiCesare(String chiave) {
+        int key = 0;
+        try{
+           key = Integer.parseInt(chiave);
+        } catch(NumberFormatException e) {
+            System.out.println("Inserisci un numero");
+        }
+        this(key);
+    }
 
     public String cifra(String messaggio){
         msgIsValid(messaggio);
@@ -49,12 +59,13 @@ public class CifrarioDiCesare {
     }
 
     private int checkKey(int chiave) {
+        if (chiave == 0) System.out.println("Chiave non valida");
         return Math.abs(chiave) % 26;
     }
 
     private void msgIsValid(String messaggio) {
         if (messaggio == null || messaggio.isEmpty()) {
-            System.out.println("Error: messaggio non valido.");
+            System.out.println("Error: inserire messaggio");
         }
     }
 }
