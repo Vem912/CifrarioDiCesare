@@ -87,6 +87,7 @@ public class App {
                 System.out.println("Che simpaticone!! Inserisci il messaggio da decifrare!");
             }
         } while (true);
+        System.out.println();
         presentazione();
     }
 
@@ -166,6 +167,7 @@ public class App {
                         System.out.println();
                         System.out.println("Ci sei cascato! :)");
                         System.out.println("Verrai subito reindirizzato al nostro servizio SUPERSEGRETO!!");
+                        System.out.println();
                         bruteForce(sc);
                         break;
                     }
