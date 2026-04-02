@@ -9,6 +9,20 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        CifrarioDiCesare cifrarioDiCesare = new CifrarioDiCesare(4);
+        String messaggio = "Lo farò, andremo là, è importante!";
+
+        String msgCifrato = cifrarioDiCesare.cifra(messaggio);
+        System.out.println("Messaggio Cifrato: " + msgCifrato);
+
+        String msgDecifrato = cifrarioDiCesare.decifra(msgCifrato);
+        System.out.println("Messaggio Decifrato: " + msgDecifrato);
+        System.out.println();
+
+        System.out.println("Decifratura a forza bruta:");
+        for(int i = 1; i <26 ; i++){
+            CifrarioDiCesare cifrarioDiCesare1 = new CifrarioDiCesare(i);
+            System.out.println(i +" "+ cifrarioDiCesare1.decifra(msgCifrato));
+        }
     }
 }
