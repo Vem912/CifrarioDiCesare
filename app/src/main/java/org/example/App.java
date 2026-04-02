@@ -88,7 +88,6 @@ public class App {
             }
         } while (true);
         System.out.println();
-        presentazione();
     }
 
     private static void decifraMessagio(Scanner sc) {
@@ -96,9 +95,17 @@ public class App {
         System.out.println("Prima di tutto dobbiamo assicurarci che tu abbia l'autorizzazione a decriptare il messaggio");
         System.out.println("Sei a conoscenza della chiave di decriptazione [S,N]");
         while (true) {
-            String digit = sc.nextLine();
-            checkExit(digit);
-            if (digit.equalsIgnoreCase("s")) {
+            String digitCheckUno;
+            while (true) {
+                digitCheckUno = sc.nextLine();
+                checkExit(digitCheckUno);
+                if(!digitCheckUno.equalsIgnoreCase("s")
+                        && !digitCheckUno.equalsIgnoreCase("n")) {
+                    System.out.println("Non sembrava una domanda cosi difficile!");
+                    System.out.println("Dovevi solo digitare 'S' o 'N'! Riprova!");
+                }else break;
+            }
+            if (digitCheckUno.equalsIgnoreCase("s")) {
                 System.out.println("Ottimo, inseriscila pure...");
                 CifrarioDiCesare cifrarioDiCesare;
                 String key;
@@ -142,7 +149,7 @@ public class App {
                 }
                 break;
             }
-            else if (digit.equalsIgnoreCase("n")){
+            else if (digitCheckUno.equalsIgnoreCase("n")){
                 System.out.println();
                 System.out.println("Te la sei dimenticata eh? sei proprio una persona sbadata!!");
                 System.out.println("Oppure sei un impostore??");
@@ -172,7 +179,7 @@ public class App {
                         break;
                     }
                 }
-            }
+            }break;
         }
     }
 
