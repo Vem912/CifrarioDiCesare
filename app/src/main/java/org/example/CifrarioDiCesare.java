@@ -15,15 +15,15 @@ public class CifrarioDiCesare {
         this.key = checkKey(key);
     }
     
-    public CifrarioDiCesare(String chiave) {
-        int key = 0;
-        try{
-           key = Integer.parseInt(chiave);
-        } catch(NumberFormatException e) {
-            System.out.println("Inserisci un numero");
-        }
-        this(key);
-    }
+//    public CifrarioDiCesare(String chiave) {
+//        int key = 0;
+//        try{
+//           key = Integer.parseInt(chiave);
+//        } catch(NumberFormatException e) {
+//            System.out.println("chiave non valida, Inserire un valore numerico");
+//        }
+//        this(key);
+//    }
 
     public String cifra(String messaggio){
         msgIsValid(messaggio);

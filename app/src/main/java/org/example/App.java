@@ -10,22 +10,34 @@ public class App {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        CifrarioDiCesare cifrarioDiCesare;
-        System.out.println("Benvenuto nel Cifrario di Cesare");
-        System.out.println("Digita 'exit' per uscire");
-
-        while(true){
-            System.out.println("Inserisci il messaggio da cifrare");
-            String messaggio = sc.nextLine();
-            if(messaggio.equalsIgnoreCase("exit")) break;
-            System.out.println("Inserisci chiave di cifratura");
-            String chiave = sc.nextLine();
-            cifrarioDiCesare = new CifrarioDiCesare(Integer.parseInt(chiave));
-            String cifrateMsg = cifrarioDiCesare.cifra(messaggio);
-            System.out.println("Messaggio Cifrato: " + cifrateMsg );
-            System.out.println("Messaggio Decifrato: " + cifrarioDiCesare.decifra(cifrateMsg));
-        }
-    }
+    /**
+     * versione 1.0
+     */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        CifrarioDiCesare cifrarioDiCesare;
+//        System.out.println("Benvenuto nel Cifrario di Cesare");
+//        System.out.println("Digita 'exit' per uscire");
+//
+//        while(true){
+//            System.out.println("Inserisci chiave di cifratura");
+//            String chiave = sc.nextLine();
+//            if(chiave.equalsIgnoreCase("exit")) break;
+//            try{
+//                int key = Integer.parseInt(chiave);
+//                cifrarioDiCesare = new CifrarioDiCesare(key);
+//            } catch (NumberFormatException e){
+//                System.out.println("Chiave non valida, inserire valore numerico");
+//                continue;
+//            }
+//            System.out.println("Inserisci il messaggio da cifrare");
+//            String messaggio = sc.nextLine();
+//            if(messaggio.equalsIgnoreCase("exit")) break;
+//            String cifrateMsg = cifrarioDiCesare.cifra(messaggio);
+//            System.out.println("Messaggio Cifrato: " + cifrateMsg);
+//            System.out.println("Messaggio Decifrato: " + cifrarioDiCesare.decifra(cifrateMsg));
+//            System.out.println("Arrivederci!");
+//            break;
+//        }
+//    }
 }
